@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriHub | Dynamic Crop Weather Calendar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/crop-calendar.css">
+</head>
+<body data-page="crop-calendar">
+<div id="site-header"></div>
+
+<main class="page-shell crop-weather-page">
+    <div class="container-fluid px-lg-5">
+        <header class="page-header calendar-page-header">
+            <span class="page-eyebrow">AgriHub Decision Support</span>
+            <h1 class="page-title">Dynamic Crop Weather Calendar</h1>
+            <p class="page-subtitle mb-0">Crop-stage estimation, real Open-Meteo weather, GDD, water status and the existing activity calendar in one dashboard.</p>
+        </header>
+
+        <div class="calendar-top-grid">
+            <section class="content-card calendar-input-card">
+                <div class="section-title-row">
+                    <div>
+                        <span class="section-kicker">INPUTS</span>
+                        <h4 class="fw-bold mb-1">Farm & Crop Details</h4>
+                    </div>
+                    <span class="prototype-pill">Prototype advisory</span>
+                </div>
+
+                <form id="cropCalForm">
+                    <div class="form-section-label">Location</div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="calState" class="form-label">State</label>
+                            <input id="calState" class="form-control" placeholder="Andhra Pradesh">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="calDistrict" class="form-label">District</label>
+                            <input id="calDistrict" class="form-control" placeholder="Prakasam">
+                        </div>
+                        <div class="col-12">
+                            <label for="calLocation" class="form-label">Farm Location / Village</label>
+                            <input id="calLocation" class="form-control" placeholder="Podili">
+                            <div class="form-text">Location is optional for the activity calendar, but required for weather/GDD results.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-section-label mt-4">Crop Selection</div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="calCrop" class="form-label">Crop</label>
+                            <select id="calCrop" class="form-select" required>
+                                <option value="">-- select crop --</option>
+                                <option>Groundnut</option>
+                                <option>Rice</option>
+                                <option>Cotton</option>
+                                <option>Maize</option>
+                                <option>Tomato</option>
+                                <option>Chilli</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="calDuration" class="form-label">Crop Variety / Duration</label>
+                            <select id="calDuration" class="form-select">
+                                <option>Short Duration</option>
+                                <option selected>Medium Duration</option>
+                                <option>Long Duration</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="calSowingDate" class="form-label">Sowing Date</label>
+                            <input type="date" id="calSowingDate" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="calSeason" class="form-label">Season</label>
+                            <select id="calSeason" class="form-select">
+                                <option>Kharif</option>
+                                <option>Rabi</option>
+                                <option>Zaid</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label for="calIrrigation" class="form-label">Irrigation Source</label>
+                            <select id="calIrrigation" class="form-select">
+                                <option value="">-- select --</option>
+                                <option>Canal</option>
+                                <option>Borewell</option>
+                                <option>Rainfed</option>
+                                <option>Tank</option>
+                                <option>Drip</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success w-100 mt-4 py-2 fw-semibold" type="submit">Generate Crop Weather Calendar</button>
+                </form>
+            </section>
+
+            <section class="content-card calendar-summary-card" id="calendarSummaryCard">
+                <span class="section-kicker">CURRENT CROP SUMMARY</span>
+                <h4 class="fw-bold">Ready to Generate</h4>
+                <p class="text-muted">Enter crop details and generate the dashboard. The existing activity calendar remains available even when weather data cannot be fetched.</p>
+                <div class="empty-dashboard-graphic">🌱 <span>Crop + Weather + Calendar</span></div>
+            </section>
+        </div>
+
+        <div id="cropWeatherResults" class="d-none">
+            <section class="weather-card-grid mt-4" id="weatherCards"></section>
+
+            <section class="dashboard-two-col mt-4">
+                <div class="content-card stage-card" id="cropStagePanel"></div>
+                <div class="content-card" id="weatherAlertsPanel"></div>
+            </section>
+
+            <section class="content-card mt-4">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-kicker">FORECAST WEATHER</span>
+                        <h4 class="fw-bold mb-0">Daily Weather Forecast</h4>
+                    </div>
+                    <span class="data-source-chip">Open-Meteo</span>
+                </div>
+                <div class="table-responsive mt-3">
+                    <table class="table calendar-table align-middle mb-0">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Max Temp</th>
+                            <th>Min Temp</th>
+                            <th>Rainfall</th>
+                            <th>Humidity</th>
+                            <th>Wind</th>
+                            <th>Daily GDD</th>
+                            <th>Estimated Stage</th>
+                            <th>Advisory</th>
+                        </tr>
+                        </thead>
+                        <tbody id="forecastTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="dashboard-two-col mt-4">
+                <div class="content-card" id="thresholdPanel"></div>
+                <div class="content-card" id="waterStatusPanel"></div>
+            </section>
+
+            <section class="content-card mt-4">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-kicker">WATER BY OBSERVED STAGE</span>
+                        <h4 class="fw-bold mb-0">Stage-Based Water Table</h4>
+                    </div>
+                    <span class="prototype-pill">ET0-based prototype</span>
+                </div>
+                <div class="table-responsive mt-3">
+                    <table class="table calendar-table align-middle mb-0">
+                        <thead>
+                        <tr>
+                            <th>Crop Stage</th>
+                            <th>Period</th>
+                            <th>Estimated Water Demand</th>
+                            <th>Rainfall Received</th>
+                            <th>Water Deficit</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody id="stageWaterTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="content-card mt-4 mb-4">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-kicker">EXISTING CALENDAR — ENHANCED</span>
+                        <h4 class="fw-bold mb-0">Dynamic Activity Calendar</h4>
+                    </div>
+                    <span class="data-source-chip" id="forecastUntilChip">Forecast-aware</span>
+                </div>
+                <div id="activityCalendar" class="activity-grid mt-3"></div>
+                <div id="calendarDisclaimer" class="calendar-disclaimer mt-4"></div>
+            </section>
+        </div>
+    </div>
+</main>
+
+<div id="site-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/features.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/crop-calendar.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

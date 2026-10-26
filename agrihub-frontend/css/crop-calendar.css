@@ -1,0 +1,179 @@
+.crop-weather-page { padding-top: 1.5rem; }
+.calendar-page-header { margin-bottom: 1.25rem; }
+.calendar-top-grid, .dashboard-two-col {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.6fr);
+    gap: 1.25rem;
+    align-items: start;
+}
+.calendar-input-card { position: sticky; top: 1rem; }
+.section-title-row, .section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.section-kicker {
+    display: inline-block;
+    color: #2e7d4f;
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    margin-bottom: .3rem;
+}
+.form-section-label {
+    font-size: .82rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #53665a;
+    border-bottom: 1px solid #e2e9e4;
+    padding-bottom: .45rem;
+    margin-bottom: .85rem;
+}
+.prototype-pill, .data-source-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: .35rem .65rem;
+    border-radius: 999px;
+    background: #edf5ef;
+    color: #225c3c;
+    font-size: .76rem;
+    font-weight: 700;
+}
+.empty-dashboard-graphic {
+    min-height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: .5rem;
+    font-size: 3rem;
+    color: #2e7d4f;
+    border: 1px dashed #c9d8ce;
+    border-radius: 18px;
+    background: #f8fbf9;
+}
+.empty-dashboard-graphic span { font-size: .9rem; color: #6d7d72; font-weight: 700; }
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+    margin-top: 1rem;
+}
+.summary-item {
+    background: #f7faf8;
+    border: 1px solid #e3ebe5;
+    border-radius: 14px;
+    padding: .8rem .9rem;
+}
+.summary-item span { display: block; font-size: .72rem; color: #718078; text-transform: uppercase; font-weight: 700; }
+.summary-item strong { display: block; margin-top: .2rem; color: #173e2a; font-size: .96rem; }
+.weather-card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+.weather-metric-card {
+    background: #fff;
+    border: 1px solid #e2e9e4;
+    border-radius: 18px;
+    padding: 1.05rem;
+    box-shadow: 0 8px 24px rgba(25, 73, 47, .05);
+}
+.metric-icon { font-size: 1.3rem; }
+.metric-label { color: #6f7c73; font-size: .8rem; font-weight: 700; text-transform: uppercase; margin-top: .65rem; }
+.metric-value { color: #173e2a; font-size: 1.6rem; font-weight: 800; margin-top: .15rem; }
+.stage-card { border-left: 4px solid #2e7d4f; }
+.stage-hero {
+    display: grid;
+    grid-template-columns: 1.4fr .8fr .8fr;
+    gap: .8rem;
+    margin-top: 1rem;
+}
+.stage-value {
+    background: #f6faf7;
+    border-radius: 14px;
+    padding: .85rem;
+    border: 1px solid #e1ebe4;
+}
+.stage-value span { display: block; font-size: .72rem; color: #718078; font-weight: 700; }
+.stage-value strong { color: #1b5637; font-size: 1rem; }
+.alert-stack { display: grid; gap: .7rem; margin-top: 1rem; }
+.weather-alert {
+    border-radius: 14px;
+    padding: .8rem .9rem;
+    border: 1px solid #e3e9e5;
+    background: #f8faf9;
+}
+.weather-alert.success { border-left: 4px solid #2e8b57; }
+.weather-alert.info { border-left: 4px solid #3f7db8; }
+.weather-alert.warning { border-left: 4px solid #d69b27; }
+.weather-alert.danger { border-left: 4px solid #c94a4a; }
+.weather-alert .alert-title { font-weight: 800; color: #243c2e; }
+.weather-alert .alert-date { font-size: .74rem; color: #7a8780; }
+.calendar-table { font-size: .86rem; }
+.calendar-table thead th {
+    background: #eef5f0;
+    color: #214b33;
+    border-bottom: 0;
+    white-space: nowrap;
+}
+.calendar-table td { vertical-align: top; min-width: 90px; }
+.advisory-cell { min-width: 250px !important; color: #4a5f51; }
+.threshold-grid, .water-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .65rem;
+    margin-top: 1rem;
+}
+.threshold-box, .water-stat-box {
+    padding: .75rem;
+    border-radius: 12px;
+    background: #f7faf8;
+    border: 1px solid #e3ebe5;
+}
+.threshold-box span, .water-stat-box span { display: block; font-size: .72rem; color: #738078; font-weight: 700; }
+.threshold-box strong, .water-stat-box strong { color: #19472f; }
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .9rem;
+}
+.activity-card {
+    border: 1px solid #dfe7e1;
+    border-left-width: 4px;
+    border-radius: 16px;
+    padding: .95rem;
+    background: #fff;
+}
+.activity-card.green { border-left-color: #2e8b57; }
+.activity-card.orange { border-left-color: #d69b27; }
+.activity-card.red { border-left-color: #c94a4a; }
+.activity-card.blue { border-left-color: #4d7fae; }
+.activity-head { display: flex; justify-content: space-between; align-items: start; gap: .75rem; }
+.activity-date { font-size: .78rem; font-weight: 800; color: #1f613e; white-space: nowrap; }
+.activity-meta { display: flex; gap: .45rem; flex-wrap: wrap; margin-top: .55rem; }
+.activity-meta span { font-size: .72rem; padding: .25rem .5rem; border-radius: 999px; background: #f0f5f2; color: #52675a; }
+.activity-advisory { margin-top: .7rem; font-size: .84rem; color: #44584b; }
+.reschedule-box { margin-top: .65rem; background: #fff8e8; border: 1px solid #f0d994; border-radius: 10px; padding: .6rem; font-size: .8rem; }
+.calendar-disclaimer {
+    font-size: .78rem;
+    line-height: 1.55;
+    color: #66756c;
+    background: #f6f8f7;
+    border-radius: 12px;
+    padding: .85rem;
+}
+.loading-panel { min-height: 240px; display:flex; align-items:center; justify-content:center; flex-direction:column; }
+.api-warning { background:#fff6e8; border:1px solid #efd49a; border-radius:12px; padding:.8rem; color:#73561d; }
+
+@media (max-width: 1100px) {
+    .calendar-top-grid, .dashboard-two-col { grid-template-columns: 1fr; }
+    .calendar-input-card { position: static; }
+    .weather-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+    .weather-card-grid, .activity-grid, .summary-grid, .stage-hero, .threshold-grid, .water-stat-grid { grid-template-columns: 1fr; }
+}

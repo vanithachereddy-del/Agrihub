@@ -1,0 +1,52 @@
+/* main.css - Premium styling with dark mode and glassmorphism */
+:root {
+  --primary-color: hsl(160, 70%, 40%);
+  --bg-gradient: linear-gradient(135deg, hsl(210, 60%, 20%), hsl(260, 50%, 25%));
+  --card-bg: rgba(255, 255, 255, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.2);
+  --text-color: #f0f0f0;
+  --font-family: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background: var(--bg-gradient);
+  backdrop-filter: blur(8px);
+}
+
+.navbar, .section-block {
+  background: var(--glass-bg);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  padding: 1rem;
+}
+
+.btn-primary, .btn-success {
+  background: var(--primary-color);
+  border: none;
+  transition: transform 0.2s ease;
+}
+.btn-primary:hover, .btn-success:hover {
+  transform: translateY(-2px);
+}
+
+.quick-card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  text-align: center;
+  padding: 1rem;
+  transition: background 0.3s;
+}
+.quick-card:hover {
+  background: var(--glass-bg);
+}
+
+/* Responsive grid */
+@media (min-width: 768px) {
+  .section-block .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
